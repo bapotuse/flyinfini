@@ -127,9 +127,6 @@ time, which makes four turns the real lower bound.
 ### Use of AI
 
 An AI assistant was used for two things: looking up functions and
-syntax I was unsure about (`sys.stdout.isatty()`, `enum` properties,
-typing notations, ANSI escape codes), and handling repetitive work
-(docstrings, the test maps in `maps/custom` and `maps/errors`, and a
-checker that replays the output against the map to verify every rule).
-The algorithm choices and the code itself were reviewed and tested
-before being kept.
+syntax I was unsure typing notations, ANSI escape codes, and handling repetitive work
+(docstrings, the test maps in `maps/custom` and `maps/errors`).
+
