@@ -187,15 +187,14 @@ The `--visual` option prints three blocks:
   and the names of the two hubs painted with their own color.
 * **Zones**: every zone with a sign showing its type (`+` priority,
   `!` restricted, `x` blocked), its type in full and its capacity.
-* **Simulation**: one line per turn, where every move is painted twice:
-  the drone with its own color, the destination with the color written
-  in the map file.
+* **Simulation**: one line per turn, where every move is painted with
+  the color of the drone that makes it.
 
-Zone colors come from the `color=` metadata, so reading a turn tells
-which part of the network the fleet is flowing through without looking
-the names up. Drone colors are picked from a fixed palette and never
-change during a run, so a single drone can be followed from one turn to
-the next. `--no-color` prints the same thing in plain text, for a
+Zone colors come from the `color=` metadata and are used in the two
+blocks above. In the turns, a whole move such as `D1-junction` takes the
+color of its drone instead: that color is picked from a fixed palette
+and never changes during a run, so a single drone can be followed from
+one turn to the next without reading the names. `--no-color` prints the same thing in plain text, for a
 terminal without colors or to redirect the output to a file.
 
 Without `--visual` the program prints one line per turn and nothing

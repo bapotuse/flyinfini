@@ -93,8 +93,8 @@ class Display:
             return text
         return self.paint(text, self.network.zones[name].color)
 
-    def drone_label(self, drone: str) -> str:
-        """Return a drone name painted with its own color.
+    def drone_color(self, drone: str) -> str | None:
+        """Return the color owned by a drone.
 
         Each drone keeps the same color for the whole simulation, so a
         single drone can be followed from one turn to the next.
@@ -104,22 +104,19 @@ class Display:
         """
         number = drone[1:]
         if not drone.startswith("D") or not number.isdigit():
-            return drone
-        color = DRONE_COLORS[(int(number) - 1) % len(DRONE_COLORS)]
-        return self.paint(drone, color)
+            return None
+        return DRONE_COLORS[(int(number) - 1) % len(DRONE_COLORS)]
 
     def move_label(self, move: str) -> str:
-        """Return one move with the drone and the destination painted.
+        """Return one whole move painted with the color of its drone.
 
         Args:
             move: a move such as 'D1-roof1'.
         """
         if "-" not in move:
             return move
-        cut = move.index("-")
-        drone = move[:cut]
-        target = move[cut + 1:]
-        return f"{self.drone_label(drone)}-{self.zone_label(target)}"
+        drone = move[:move.index("-")]
+        return self.paint(move, self.drone_color(drone))
 
     def show_header(self) -> None:
         """Print the zones of the map and what they mean."""
