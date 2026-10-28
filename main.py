@@ -57,6 +57,8 @@ def main() -> int:
     else:
         for moves in turns:
             print(" ".join(moves))
+        sys.stdout.flush()
+        print(f"Turns: {len(turns)}", file=sys.stderr)
     return 0
 
 

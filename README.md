@@ -70,6 +70,16 @@ The program exits with the code `0` on success and `1` on error. Every
 error is printed on the standard error output with the line number and
 the reason.
 
+The total number of turns is printed on the standard error output too,
+as `Turns: 4`, so that the standard output keeps exactly the format the
+subject asks for. Redirect it away to get the raw lines only:
+
+```bash
+python3 main.py maps/easy/02_simple_fork.txt 2>/dev/null
+```
+
+With `--visual` the count appears in the **Result** block instead.
+
 ## Features
 
 * strict parser with clear error messages pointing at the faulty line;
@@ -79,6 +89,7 @@ the reason.
 * turn scheduler that spreads the fleet over several routes, reuses the
   places freed during the turn and avoids deadlocks;
 * colored terminal output describing the map and every turn;
+* turn counter printed on the standard error output;
 * extra maps in `maps/custom` and `maps/errors` used during development.
 
 ## Technical choices
