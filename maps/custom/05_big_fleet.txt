@@ -1,0 +1,11 @@
+# Twenty drones on a wide corridor, to watch the queue flow.
+nb_drones: 20
+
+start_hub: start 0 0 [color=green]
+hub: lane1 1 0 [color=blue max_drones=5]
+hub: lane2 2 0 [color=blue max_drones=5]
+end_hub: goal 3 0 [color=red]
+
+connection: start-lane1 [max_link_capacity=5]
+connection: lane1-lane2 [max_link_capacity=5]
+connection: lane2-goal [max_link_capacity=5]

@@ -1,0 +1,12 @@
+# Two ways of the same length: the priority one must be preferred.
+nb_drones: 2
+
+start_hub: start 0 0 [color=green]
+hub: plain 1 1 [color=blue]
+hub: fast 1 -1 [zone=priority color=cyan]
+end_hub: goal 2 0 [color=red]
+
+connection: start-plain
+connection: start-fast
+connection: plain-goal
+connection: fast-goal

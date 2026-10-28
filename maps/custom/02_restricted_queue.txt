@@ -1,0 +1,14 @@
+# A restricted zone followed by a narrow zone: the drone inside the
+# restricted zone cannot always leave, so booking must stay careful.
+nb_drones: 4
+
+start_hub: start 0 0 [color=green]
+hub: mid 1 0 [color=blue max_drones=4]
+hub: rest 2 0 [zone=restricted color=red]
+hub: narrow 3 0 [color=yellow]
+end_hub: goal 4 0 [color=green]
+
+connection: start-mid [max_link_capacity=4]
+connection: mid-rest
+connection: rest-narrow
+connection: narrow-goal

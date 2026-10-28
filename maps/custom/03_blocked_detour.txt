@@ -1,0 +1,14 @@
+# The short way is blocked, every drone must take the long way.
+nb_drones: 3
+
+start_hub: start 0 0 [color=green]
+hub: wall 1 0 [zone=blocked color=gray]
+hub: detour1 1 1 [color=blue max_drones=3]
+hub: detour2 2 1 [color=blue max_drones=3]
+end_hub: goal 2 0 [color=red]
+
+connection: start-wall
+connection: wall-goal
+connection: start-detour1 [max_link_capacity=3]
+connection: detour1-detour2 [max_link_capacity=3]
+connection: detour2-goal [max_link_capacity=3]

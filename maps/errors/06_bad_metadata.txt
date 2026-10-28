@@ -1,0 +1,6 @@
+nb_drones: 2
+
+start_hub: start 0 0
+end_hub: goal 1 0
+hub: odd 2 2 [maxdrones 3]
+connection: start-goal

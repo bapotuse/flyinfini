@@ -1,0 +1,7 @@
+# One drone, one hop: the smallest possible map.
+nb_drones: 1
+
+start_hub: start 0 0 [color=green]
+end_hub: goal 1 0 [color=red]
+
+connection: start-goal
