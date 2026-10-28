@@ -126,10 +126,10 @@ time, which makes four turns the real lower bound.
 
 ### Use of AI
 
-An AI assistant (Claude) was used to read the subject and list its
-rules, to write a first version of the modules, to write an independent
-checker replaying the output against the map, and to build the maps in
-`maps/custom` and `maps/errors`. That checker is what found the
-scheduling bug on `maps/medium/02_circular_loop.txt`, where the first
-version needed fifteen turns instead of ten. Every generated part was
-read and tested before being kept.
+An AI assistant was used for two things: looking up functions and
+syntax I was unsure about (`sys.stdout.isatty()`, `enum` properties,
+typing notations, ANSI escape codes), and handling repetitive work
+(docstrings, the test maps in `maps/custom` and `maps/errors`, and a
+checker that replays the output against the map to verify every rule).
+The algorithm choices and the code itself were reviewed and tested
+before being kept.
