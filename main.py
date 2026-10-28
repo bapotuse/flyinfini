@@ -1,5 +1,3 @@
-"""Command line entry point of the Fly-in simulation."""
-
 from __future__ import annotations
 
 import argparse
