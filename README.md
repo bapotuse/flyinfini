@@ -72,7 +72,8 @@ the reason.
 
 The total number of turns is printed on the standard error output too,
 as `Turns: 4`, so that the standard output keeps exactly the format the
-subject asks for. Redirect it away to get the raw lines only:
+subject asks for. Redirect it away to get the raw lines only, which also
+turns the colors off:
 
 ```bash
 python3 main.py maps/easy/02_simple_fork.txt 2>/dev/null
@@ -197,8 +198,12 @@ change during a run, so a single drone can be followed from one turn to
 the next. `--no-color` prints the same thing in plain text, for a
 terminal without colors or to redirect the output to a file.
 
-Without `--visual` the program prints only the official format, one line
-per turn, which keeps it usable in a pipe.
+Without `--visual` the program prints one line per turn and nothing
+else. Those lines are painted too when the output really goes to a
+terminal, and plain as soon as it is redirected or piped, which is what
+`sys.stdout.isatty()` is used for: a human reads colors, a script reads
+the exact format the subject asks for. `--no-color` forces plain text in
+every case.
 
 ## Example
 

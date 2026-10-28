@@ -165,6 +165,17 @@ class Display:
             return f"\n{text}"
         return f"\n{BOLD}{text}{RESET}"
 
+    def moves_line(self, moves: list[str]) -> str:
+        """Return the moves of one turn, painted, in the official order.
+
+        Args:
+            moves: the moves played during this turn.
+        """
+        painted: list[str] = []
+        for move in moves:
+            painted.append(self.move_label(move))
+        return " ".join(painted)
+
     def show_turn(self, number: int, moves: list[str]) -> None:
         """Print one turn with colors.
 
@@ -172,13 +183,10 @@ class Display:
             number: the number of the turn, starting at 1.
             moves: the moves played during this turn.
         """
-        painted: list[str] = []
-        for move in moves:
-            painted.append(self.move_label(move))
         label = f"turn {number:>3}"
         if self.colored:
             label = f"{BOLD}{label}{RESET}"
-        print(f"  {label}  " + " ".join(painted))
+        print(f"  {label}  " + self.moves_line(moves))
 
     def show_summary(self, turns: int) -> None:
         """Print the final result of the simulation.

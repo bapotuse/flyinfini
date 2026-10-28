@@ -26,13 +26,16 @@ def build_arguments() -> argparse.ArgumentParser:
     parser.add_argument(
         "--no-color",
         action="store_true",
-        help="print plain text, without any color",
+        help="print plain text, even when writing to a terminal",
     )
     return parser
 
 
 def main() -> int:
     """Run the simulation asked on the command line.
+
+    Colors are used only when the output really goes to a terminal, so
+    a redirected output keeps the exact format asked by the subject.
 
     Returns:
         0 when everything went well, 1 on error.
@@ -46,7 +49,8 @@ def main() -> int:
         print(f"Error: {error}", file=sys.stderr)
         return 1
 
-    display = Display(network, not arguments.no_color)
+    colored = not arguments.no_color and sys.stdout.isatty()
+    display = Display(network, colored)
     if arguments.visual:
         display.show_header()
         number = 0
@@ -56,7 +60,7 @@ def main() -> int:
         display.show_summary(len(turns))
     else:
         for moves in turns:
-            print(" ".join(moves))
+            print(display.moves_line(moves))
         sys.stdout.flush()
         print(f"Turns: {len(turns)}", file=sys.stderr)
     return 0
