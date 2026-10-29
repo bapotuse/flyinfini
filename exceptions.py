@@ -9,12 +9,16 @@ class ParseError(FlyInError):
         """Build a parsing error.
 
         Args:
-            line_number: 1-based number of the faulty line.
+            line_number: 1-based number of the faulty line, or 0 when
+                the problem concerns the whole file.
             message: human readable cause of the failure.
         """
         self.line_number = line_number
         self.message = message
-        super().__init__(f"line {line_number}: {message}")
+        if line_number > 0:
+            super().__init__(f"line {line_number}: {message}")
+        else:
+            super().__init__(message)
 
 
 class SimulationError(FlyInError):

@@ -25,6 +25,15 @@ COLORS = {
     "bright_blue": "\033[94m",
     "bright_magenta": "\033[95m",
     "bright_cyan": "\033[96m",
+    "brown": "\033[38;5;130m",
+    "crimson": "\033[38;5;161m",
+    "darkred": "\033[38;5;88m",
+    "gold": "\033[38;5;220m",
+    "lime": "\033[38;5;118m",
+    "maroon": "\033[38;5;52m",
+    "purple": "\033[38;5;93m",
+    "violet": "\033[38;5;177m",
+    "rainbow": "\033[38;5;213m",
 }
 
 DRONE_COLORS = [

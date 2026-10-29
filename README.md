@@ -69,7 +69,7 @@ D3-goal D4-goal
 
 An error looks like `Error: line 6: unknown zone type 'strange'`.
 
-## Technical choices
+## Algorithm explanation
 
 One class per notion: `ZoneType` and `Zone`, `Connection`, `Network`,
 `MapParser`, `Drone`, `Pathfinder`, `Simulation`, `Display`. Each rule
@@ -94,7 +94,11 @@ fleet over several routes instead of making it wait.
 booked before taking off. `can_book()` accepts a free slot, but also
 accepts a slot held by a drone that will be able to leave on the very
 turn the newcomer lands. Without that second case the fleet would move
-at half speed on `maps/medium/02_circular_loop.txt`.
+at half speed on `maps/medium/02_circular_loop.txt`. The same goes
+for connections: a drone landing in a restricted zone frees its
+connection on that turn, so another drone may take off on it. Counting
+the landing drone as well would give 15 turns on that map instead of
+the 10 announced by the subject.
 
 A turn with no move at all means nothing will ever change again, so the
 program stops with a clear message instead of hanging.
@@ -126,7 +130,8 @@ time, which makes four turns the real lower bound.
 
 ### Use of AI
 
-An AI assistant was used for two things: looking up functions and
-syntax I was unsure typing notations, ANSI escape codes, and handling repetitive work
-(docstrings, the test maps in `maps/custom` and `maps/errors`).
+An AI assistant was used for two things: looking up syntax I was
+unsure of (type hint notations, ANSI escape codes), and handling
+repetitive work (docstrings, the test maps in `maps/custom` and
+`maps/errors`).
 
