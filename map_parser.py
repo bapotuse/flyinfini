@@ -7,6 +7,7 @@ from exceptions import ParseError
 from network import Network
 from zone import Zone, ZoneType
 
+MAX_DRONES = 1000000
 ZONE_KEYS = ["zone", "color", "max_drones"]
 LINK_KEYS = ["max_link_capacity"]
 
@@ -38,6 +39,8 @@ class MapParser:
                 lines = map_file.readlines()
         except OSError as error:
             raise ParseError(0, f"cannot read the map file: {error}")
+        except UnicodeDecodeError:
+            raise ParseError(0, "the map file is not valid UTF-8 text")
 
         number = 0
         for raw_line in lines:
@@ -103,6 +106,10 @@ class MapParser:
         value = self.to_int(number, rest, "nb_drones")
         if value <= 0:
             raise ParseError(number, "nb_drones must be a positive integer")
+        if value > MAX_DRONES:
+            raise ParseError(
+                number, f"nb_drones is too large (at most {MAX_DRONES})"
+            )
         self.network.nb_drones = value
         self.nb_drones_seen = True
 
@@ -294,6 +301,9 @@ class MapParser:
     def to_int(self, number: int, text: str, what: str) -> int:
         """Convert a piece of text into an integer.
 
+        Only plain digits, with an optional leading '-', are accepted:
+        int() alone would also take '+5', '1_000' or ' 5'.
+
         Args:
             number: 1-based number of the line.
             text: the text to convert.
@@ -302,12 +312,14 @@ class MapParser:
         Raises:
             ParseError: if the text is not an integer.
         """
-        try:
-            return int(text)
-        except ValueError:
+        digits = text
+        if digits.startswith("-"):
+            digits = digits[1:]
+        if digits == "" or not digits.isascii() or not digits.isdigit():
             raise ParseError(
                 number, f"{what} must be an integer, got '{text}'"
             )
+        return int(text)
 
     def to_zone_type(self, number: int, text: str) -> ZoneType:
         """Convert a piece of text into a zone type.

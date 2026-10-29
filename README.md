@@ -91,10 +91,13 @@ strictly closer to the goal, priority zones first, which spreads the
 fleet over several routes instead of making it wait.
 
 **Restricted zones.** A drone cannot wait on a connection, so a place is
-booked before taking off. `can_book()` accepts a free slot, but also
+booked before taking off. `book()` accepts a free slot, but also
 accepts a slot held by a drone that will be able to leave on the very
 turn the newcomer lands. Without that second case the fleet would move
-at half speed on `maps/medium/02_circular_loop.txt`. The same goes
+at half speed on `maps/medium/02_circular_loop.txt`. That departure is
+then promised: a place on its way out is kept for it during the next
+turn, so no other drone can take it and leave the newcomer with
+nowhere to land. The same goes
 for connections: a drone landing in a restricted zone frees its
 connection on that turn, so another drone may take off on it. Counting
 the landing drone as well would give 15 turns on that map instead of
@@ -115,7 +118,7 @@ turns.
 ## Results
 
 Turns on the maps of the subject: 4, 4, 4 (easy), 8, 10, 6 (medium),
-13, 16, 26 (hard), 44 (challenger). Every reference is reached except
+13, 16, 26 (hard), 45 (challenger). Every reference is reached except
 `easy/03`, where four drones must cross a zone holding two of them at a
 time, which makes four turns the real lower bound.
 
@@ -132,6 +135,5 @@ time, which makes four turns the real lower bound.
 
 An AI assistant was used for two things: looking up syntax I was
 unsure of (type hint notations, ANSI escape codes), and handling
-repetitive work (docstrings, the test maps in `maps/custom` and
-`maps/errors`).
+repetitive work (docstrings).
 
